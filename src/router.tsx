@@ -3,6 +3,7 @@ import AppLayout from "@/layouts/AppLayout";
 import DashboardView from "@/views/DashboardView";
 import CreateProjectView from "./views/projects/CreateProjectView";
 import EditProjectView from "./views/projects/EditProjectView";
+import ProjectDetailsView from "./views/projects/ProjectDetailsView";
 
 const Router = () => {
   return (
@@ -21,6 +22,10 @@ const Router = () => {
           <Route
             path="/projects/:projectId/edit"
             element={<EditProjectView />}
+          />
+          <Route
+            path="/projects/:projectId"
+            element={<ProjectDetailsView />}
           />
         </Route>
       </Routes>
