@@ -47,3 +47,27 @@ export const taskSchema = z.object({
 
 export type Task = z.infer<typeof taskSchema>;
 export type TaskFormData = Pick<Task, "name" | "description">;
+
+// ? Auth Users
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const authSchema = z.object({
+  name: z.string(),
+  email: z.string().email(),
+  password: z.string(),
+  passConfirmation: z.string(),
+  token: z.string(),
+});
+
+type Auth = z.infer<typeof authSchema>;
+
+export type UserLoginForm = Pick<Auth, "email" | "password">;
+export type UserRegisterForm = Pick<
+  Auth,
+  "name" | "email" | "password" | "passConfirmation"
+>;
+export type RequestConfirmationCodeForm = Pick<Auth, "email">;
+export type ForgotPasswordForm = Pick<Auth, "email">;
+export type NewPasswordForm = Pick<Auth, "password" | "passConfirmation">;
+
+export type ConfirmToken = Pick<Auth, "token">;

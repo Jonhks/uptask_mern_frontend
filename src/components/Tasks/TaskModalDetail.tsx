@@ -117,7 +117,7 @@ export default function TaskModalDetails() {
                     <div className="my-5 space-y-3">
                       <label className="font-bold">Estado Actual:</label>
                       <select
-                        className=" w-full p-3 bg-white border border-gray-50300 "
+                        className=" w-full p-3 bg-white border border-gray-300 "
                         defaultValue={data.status}
                         onChange={hancleChange}
                       >
