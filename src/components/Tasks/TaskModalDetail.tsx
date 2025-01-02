@@ -27,6 +27,7 @@ export default function TaskModalDetails() {
     queryKey: ["task", taskId],
     queryFn: () => getTaskById({ projectId, taskId }),
     enabled: !!taskId,
+    retry: false,
   });
 
   const { mutate } = useMutation({
@@ -34,8 +35,8 @@ export default function TaskModalDetails() {
     onSuccess: (resp) => {
       queryClient.invalidateQueries({ queryKey: ["project", projectId] });
       queryClient.invalidateQueries({ queryKey: ["task", taskId] });
+      navigate(location.pathname, { replace: true });
       toast.success(resp);
-      // navigate(location.pathname, { replace: true });
     },
 
     onError: (error) => {
@@ -114,6 +115,19 @@ export default function TaskModalDetails() {
                     <p className="text-lg text-slate-500 mb-2">
                       Descripción: {data.description}
                     </p>
+                    <p className=" text-2xl text-slate-500 mb-2">
+                      Historial de cambios
+                    </p>
+                    <ul className=" list-decimal">
+                      {data.completeBy.map((activity) => (
+                        <li key={activity._id}>
+                          <span className=" font-bold text-slate-600">
+                            {statusTranslations[activity.status]} por
+                          </span>{" "}
+                          {activity.user.name}
+                        </li>
+                      ))}
+                    </ul>
                     <div className="my-5 space-y-3">
                       <label className="font-bold">Estado Actual:</label>
                       <select

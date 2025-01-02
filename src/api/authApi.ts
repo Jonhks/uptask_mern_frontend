@@ -5,8 +5,10 @@ import {
   ForgotPasswordForm,
   NewPasswordForm,
   RequestConfirmationCodeForm,
+  // User,
   UserLoginForm,
   UserRegisterForm,
+  userSchema,
 } from "../types";
 
 export const createAccount = async (formData: UserRegisterForm) => {
@@ -17,6 +19,7 @@ export const createAccount = async (formData: UserRegisterForm) => {
   } catch (error) {
     if (isAxiosError(error) && error.response)
       throw new Error(error.response.data.error);
+    return;
   }
 };
 
@@ -28,6 +31,7 @@ export const confirmAccount = async (formData: ConfirmToken) => {
   } catch (error) {
     if (isAxiosError(error) && error.response)
       throw new Error(error.response.data.error);
+    return;
   }
 };
 
@@ -41,6 +45,7 @@ export const requestConfirmationCode = async (
   } catch (error) {
     if (isAxiosError(error) && error.response)
       throw new Error(error.response.data.error);
+    return;
   }
 };
 
@@ -53,6 +58,7 @@ export const autenticateUser = async (formData: UserLoginForm) => {
   } catch (error) {
     if (isAxiosError(error) && error.response)
       throw new Error(error.response.data.error);
+    return;
   }
 };
 
@@ -64,6 +70,7 @@ export const forgotPassword = async (formData: ForgotPasswordForm) => {
   } catch (error) {
     if (isAxiosError(error) && error.response)
       throw new Error(error.response.data.error);
+    return;
   }
 };
 
@@ -75,6 +82,7 @@ export const validateToken = async (formData: ConfirmToken) => {
   } catch (error) {
     if (isAxiosError(error) && error.response)
       throw new Error(error.response.data.error);
+    return;
   }
 };
 
@@ -92,5 +100,22 @@ export const updatePassWithToken = async ({
   } catch (error) {
     if (isAxiosError(error) && error.response)
       throw new Error(error.response.data.error);
+    return;
+  }
+};
+
+export const getUser = async () => {
+  try {
+    const url = `/auth/user`;
+    const { data } = await api.get(url);
+    // const { data } = await api.get<User>(url);
+    const response = userSchema.safeParse(data);
+    if (response.success) {
+      return response.data;
+    }
+  } catch (error) {
+    if (isAxiosError(error) && error.response)
+      throw new Error(error.response.data.error);
+    return;
   }
 };
