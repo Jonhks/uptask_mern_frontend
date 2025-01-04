@@ -1,6 +1,7 @@
 import api from "@/lib/axios";
 import { isAxiosError } from "axios";
 import {
+  checkPasswordForm,
   ConfirmToken,
   ForgotPasswordForm,
   NewPasswordForm,
@@ -113,6 +114,22 @@ export const getUser = async () => {
     if (response.success) {
       return response.data;
     }
+  } catch (error) {
+    if (isAxiosError(error) && error.response)
+      throw new Error(error.response.data.error);
+    return;
+  }
+};
+
+export const checkPassword = async (formData: checkPasswordForm) => {
+  try {
+    const url = `/auth/check-password`;
+    const { data } = await api.post(url, formData);
+    return data;
+    // const response = userSchema.safeParse(data);
+    // if (response.success) {
+    //   return response.data;
+    // }
   } catch (error) {
     if (isAxiosError(error) && error.response)
       throw new Error(error.response.data.error);

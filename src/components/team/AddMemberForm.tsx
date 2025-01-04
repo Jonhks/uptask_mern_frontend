@@ -4,7 +4,7 @@ import { useMutation } from "@tanstack/react-query";
 import ErrorMessage from "../ErrorMessage";
 import { TeamMemberForm } from "@/types/index";
 import { findUserByEmail } from "@/api/teamApi";
-import SearchResult from "./SearchREsult";
+import SearchResult from "./SearchResult";
 
 export default function AddMemberForm() {
   const initialValues: TeamMemberForm = {
