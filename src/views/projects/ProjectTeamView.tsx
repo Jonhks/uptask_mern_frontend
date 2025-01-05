@@ -1,4 +1,5 @@
 import { getProjectTeam, removeUserFromProject } from "@/api/teamApi";
+import Loader from "@/components/loader/Loader";
 import AddMemberModal from "@/components/team/AddMemberModal";
 import { Menu, Transition } from "@headlessui/react";
 import { EllipsisVerticalIcon } from "@heroicons/react/20/solid";
@@ -32,7 +33,7 @@ const ProjectTeamView = () => {
     },
   });
 
-  if (isLoading) return "Cargando...";
+  if (isLoading) return <Loader />;
   if (isError) return <Navigate to={"/404"} />;
 
   if (data)

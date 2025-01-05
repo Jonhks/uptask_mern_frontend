@@ -8,6 +8,7 @@ import TaskModalDetails from "@/components/Tasks/TaskModalDetail";
 import { useAuth } from "@/hooks/UseAuth";
 import { isManager } from "@/utils/policies";
 import { useMemo } from "react";
+import Loader from "@/components/loader/Loader";
 
 const EditProjectView = () => {
   const navigate = useNavigate();
@@ -24,7 +25,8 @@ const EditProjectView = () => {
 
   const canEdit = useMemo(() => data?.manager === user?._id, [data, user]);
 
-  if (isLoading && authLoading) return "Cargando....";
+  if (isLoading && authLoading) return <Loader />;
+
   if (isError) return <Navigate to={"/404 /"} />;
 
   if (data && user)

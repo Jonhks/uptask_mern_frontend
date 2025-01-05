@@ -7,6 +7,7 @@ import { EllipsisVerticalIcon } from "@heroicons/react/20/solid";
 import { useAuth } from "@/hooks/UseAuth";
 import { isManager } from "@/utils/policies";
 import DeleteProjectModal from "@/components/projects/DeleteProyectModal";
+import Loader from "@/components/loader/Loader";
 
 const DashboardView = () => {
   const { data: user, isLoading: authLoading } = useAuth();
@@ -16,7 +17,7 @@ const DashboardView = () => {
     queryFn: getAllProjects,
   });
 
-  if (isLoading && authLoading) return "Cargando...";
+  if (isLoading && authLoading) return <Loader />;
 
   if (data && user)
     return (

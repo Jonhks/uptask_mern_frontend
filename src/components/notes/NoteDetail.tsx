@@ -6,6 +6,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useMemo } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import Loader from "../loader/Loader";
 
 type NoteDetailProps = {
   note: Note;
@@ -32,7 +33,7 @@ const NoteDetail = ({ note }: NoteDetailProps) => {
     onError: (error) => toast.error(error.message),
   });
 
-  if (isLoading) return <p>Cargando...</p>;
+  if (isLoading) return <Loader />;
 
   if (data)
     return (
